@@ -157,18 +157,18 @@ class AgderRenovasjonData:
 
     @Throttle(MIN_TIME_BETWEEN_UPDATES)
     async def _update(self):
-        _LOGGER.info("Fetching stuff for AvfallSorData")
+        _LOGGER.debug("Fetching stuff for AgderRenovasjonData")
         await self.find_street_id()
 
         if self._street_id:
             url = f"https://api.agderrenovasjon.no/v1/address/{self._street_id}"
         else:
+            # Add error here.
             _LOGGER.info("NO ADR")
             return
         resp = await self.client.get(url)
         if resp.status == 200:
             text = await resp.json()
-            _LOGGER.info(text)
             self._data = parse_tomme_kalender(text)
             self._last_update = datetime.now()
 
@@ -203,7 +203,7 @@ class AgderRenovasjon(Entity):
             return find_next_garbage_pickup(self.data._data.get("bio"))
 
         elif self._garbage_type == "mixed":
-            return find_next_garbage_pickup(self.data._data.get("rest"))
+            return find_next_garbage_pickup(self.data._data.get("mixed"))
 
         elif self._garbage_type == "metal":
             return find_next_garbage_pickup(self.data._data.get("metal"))

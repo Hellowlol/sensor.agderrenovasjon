@@ -42,34 +42,9 @@ def find_next_garbage_pickup(dates):
         if i.date() >= today:
             return i
 
-"""
-def to_dt(s):
-    # if a year is missing we assume it is this year.
-    # this seems to only be a issue with the tomme exceptions.
-    if not re.search(r"\d{4}", s):
-        s = "%s %s" % (s, date.today().year)
-
-    for key, value in nor_days.items():
-        if key.lower() in s.lower():
-            s = s.replace(key, value)
-
-    for k, v in nor_months.items():
-        if k.lower() in s.lower():
-            s = s.replace(k, v)
-
-    return datetime.strptime(s.strip(), "%A %d. %b %Y")
-"""
-
 def to_dt(i):
     # 2019-09-13
     return datetime.strptime(i, "%Y-%m-%d")
-
-
-def longestSubstring(str1, str2):
-    """Not in use atm"""
-    seqMatch = SequenceMatcher(None, str1, str2)
-    match = seqMatch.find_longest_match(0, len(str1), 0, len(str2))
-    return match.size
 
 
 def parse_tomme_kalender(text=None):
@@ -92,6 +67,9 @@ def parse_tomme_kalender(text=None):
 
     for i in text["hentedager"]["Plast"]:
         tomme_days["plastic"].append(to_dt(i.get('hentedag')))
+
+    _LOGGER.info("bio %r", tomme_days.get("bio"))
+    _LOGGER.info("rest %r", tomme_days.get("mixed"))
 
     return tomme_days
 

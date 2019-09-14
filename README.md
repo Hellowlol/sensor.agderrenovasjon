@@ -26,8 +26,8 @@ Install using hacs or manual install
 ### Manual install
 1. Using the tool of choice open the directory (folder) for your HA configuration (where you find `configuration.yaml`).
 2. If you do not have a `custom_components` directory (folder) there, you need to create it.
-3. In the `custom_components` directory (folder) create a new folder called `avfallsor`.
-4. Download _all_ the files from the `custom_components/avfallsor/` directory (folder) in this repository.
+3. In the `custom_components` directory (folder) create a new folder called `agderrenovasjon`.
+4. Download _all_ the files from the `custom_components/agderrenovasjon/` directory (folder) in this repository.
 5. Place the files you downloaded in the new directory (folder) you created.
 6. Restart Home Assistant
 
